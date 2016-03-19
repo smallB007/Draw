@@ -1,0 +1,69 @@
+// MFC_DrawHandlers.idl : IDL source for MFC_DrawHandlers
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MFC_DrawHandlers.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(27EE6A4D-DA54-497E-99D9-3527A11E5CB5),
+	pointer_default(unique)
+]
+interface IPreview : IUnknown
+{
+};
+
+[
+	object,
+	uuid(A319BB43-8CAF-479E-A0CD-58E054AC51D8),
+	pointer_default(unique)
+]
+interface IThumbnail : IUnknown
+{
+};
+
+[
+	object,
+	uuid(03B555E4-7715-4C30-B8B1-D00F486A73D1),
+	pointer_default(unique)
+]
+interface ISearch : IUnknown
+{
+};
+
+[
+	uuid(83FBB613-056D-4C7B-9044-67E18D06E385),
+	version(1.0),
+]
+library MFC_DrawHandlersLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(591DABEA-95B3-4429-ADDA-54BCD947577C)
+	]
+	coclass Preview
+	{
+		[default] interface IPreviewHandler;
+	};
+	[
+		uuid(1BE00C64-5FD1-4E12-A236-E928294DE6CC)
+	]
+	coclass Thumbnail
+	{
+		[default] interface IThumbnailProvider;
+	};
+	[
+		uuid(DB29D0A9-5418-48A0-A405-915B5BFF3594)
+	]
+	coclass Search
+	{
+		[default] interface IFilter;
+	};
+};
+
+import "shobjidl.idl";
+import "thumbcache.idl";
+import "filter.idl";
