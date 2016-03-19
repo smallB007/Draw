@@ -4,7 +4,8 @@
 
 #pragma once
 
-class CMainFrame : public CFrameWnd
+class CMainFrame : public CBCGPFrameWnd
+	//public CFrameWnd
 {
 	
 protected: // create from serialization only
@@ -30,8 +31,12 @@ public:
 #endif
 
 protected:  // control bar embedded members
-	CToolBar          m_wndToolBar;
-	CStatusBar        m_wndStatusBar;
+// 	CToolBar          m_wndToolBar;
+ 	CStatusBar        m_wndStatusBar;
+
+	CBCGPMenuBar    m_wndMenuBar;   // New menu bar
+	CBCGPToolBar     m_wndToolBar;      // Application toolbar 
+
 
 // Generated message map functions
 protected:

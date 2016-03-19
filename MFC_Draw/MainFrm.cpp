@@ -13,9 +13,9 @@
 
 // CMainFrame
 
-IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
+IMPLEMENT_DYNCREATE(CMainFrame, CBCGPFrameWnd)
 
-BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
+BEGIN_MESSAGE_MAP(CMainFrame, CBCGPFrameWnd)
 	ON_WM_CREATE()
 END_MESSAGE_MAP()
 
@@ -43,12 +43,28 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
+	// Create menu bar (replaces the standard menu):
+	if (!m_wndMenuBar.Create(this))
+	{
+		TRACE0("Failed to create menubar\n");
+		return-1;      // fail to create
+	}
+	m_wndMenuBar.SetBarStyle(m_wndMenuBar.GetBarStyle() | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
+
+	m_wndMenuBar.EnableDocking(CBRS_ALIGN_ANY);
+	DockControlBar(&m_wndMenuBar);
+
+
 	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
 		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
 	{
 		TRACE0("Failed to create toolbar\n");
 		return -1;      // fail to create
 	}
+	// TODO: Delete these three lines if you don't want the toolbar to be dockable
+	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
+	EnableDocking(CBRS_ALIGN_ANY);
+	DockControlBar(&m_wndToolBar);
 
 	if (!m_wndStatusBar.Create(this))
 	{
@@ -57,10 +73,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	}
 	m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
 
-	// TODO: Delete these three lines if you don't want the toolbar to be dockable
-	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
-	EnableDocking(CBRS_ALIGN_ANY);
-	DockControlBar(&m_wndToolBar);
 
 
 	return 0;

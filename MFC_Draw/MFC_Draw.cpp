@@ -47,6 +47,7 @@ CMFC_DrawApp::CMFC_DrawApp()
 
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
+	SetVisualTheme(BCGP_VISUAL_THEME_OFFICE_2010_BLUE);
 }
 
 // The one and only CMFC_DrawApp object
@@ -68,7 +69,9 @@ BOOL CMFC_DrawApp::InitInstance()
 	InitCtrls.dwICC = ICC_WIN95_CLASSES;
 	InitCommonControlsEx(&InitCtrls);
 
-	CWinApp::InitInstance();
+	//CWinApp::InitInstance();
+	CBCGPWinApp::InitInstance();
+	
 
 
 	// Initialize OLE libraries
@@ -94,6 +97,7 @@ BOOL CMFC_DrawApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 	LoadStdProfileSettings(4);  // Load standard INI file options (including MRU)
+	SetRegistryBase(_T("Settings"));
 
 
 	// Register the application's document templates.  Document templates

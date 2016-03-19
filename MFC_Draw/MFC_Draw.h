@@ -14,7 +14,8 @@
 // See MFC_Draw.cpp for the implementation of this class
 //
 
-class CMFC_DrawApp : public CWinApp
+class CMFC_DrawApp : public CBCGPWinApp
+	//public CWinApp
 {
 public:
 	CMFC_DrawApp();
